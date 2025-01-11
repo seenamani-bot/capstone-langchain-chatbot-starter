@@ -85,7 +85,7 @@ def answer():
 
 @app.route("/")
 def index():
-    return render_template("index.html", title="")
+    return render_template("index.html", title="DietBot")
 
 if __name__ == "__main__":
     app.run()
