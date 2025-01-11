@@ -80,3 +80,5 @@ function displayMessage(sender, message) {
 // Handle button click event
 let sendButton = document.getElementById('send-btn');
 sendButton.addEventListener('click', sendMessage);
+
+
