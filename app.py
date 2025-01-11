@@ -31,7 +31,8 @@ qa = load_db()
 
 def answer_from_knowledgebase(message):
     res = qa({"query": message})
-    return res['result']
+    res['result']
+    return ['source_documents']
 
 def search_knowledgebase(message):
    # Search the knowledgebase and generate a response
@@ -44,7 +45,7 @@ def search_knowledgebase(message):
 def answer_as_chatbot(message):
     template = """Question: {question}
 
-   Answer as if you are an expert athlete dietition"""
+   Answer as if you are an expert dietition"""
 
     prompt = PromptTemplate(template=template, input_variables=["question"])
     llm = Cohere(cohere_api_key=os.environ["COHERE_API_KEY"])
@@ -52,8 +53,6 @@ def answer_as_chatbot(message):
     res = llm_chain.run(message)
     return res 
 
-
-   
 @app.route('/kbanswer', methods=['POST'])
 def kbanswer():
    message = request.json['message']
@@ -65,13 +64,11 @@ def kbanswer():
 def search():    
     # Search the knowledgebase and generate a response
     message = request.json['message']
+    # (call search_knowledgebase())
     search_response_message = search_knowledgebase(message)
     # Return the response as JSON
     return jsonify({'message': search_response_message}), 200
-    # (call search_knowledgebase())
     
-    # Return the response as JSON
-    return
 
 @app.route('/answer', methods=['POST'])
 def answer():
